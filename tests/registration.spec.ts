@@ -9,13 +9,13 @@ export interface userDetails {
 
     }
 
+    test.beforeEach(async({page})=>{
+        await page.goto('https://rahulshettyacademy.com/client/')
+    })
+
 test.describe('Register new user',()=>{
 
-   
-
-test('successfully register new user', async ({ page }) => {
-
-    const newUser : userDetails ={
+     const newUser : userDetails ={
         email : "timmy_004@example.com",
         firstName : "Timmy",
         lastName : 'Banks',
@@ -23,8 +23,12 @@ test('successfully register new user', async ({ page }) => {
         password : '12.Nopassword.12'
 
     }
+
+test('successfully register new user', async ({ page }) => {
+
+   
      
-    await page.goto('https://rahulshettyacademy.com/client/')
+    //await page.goto('https://rahulshettyacademy.com/client/')
     await page.locator('a').getByText('Register here').click()
 
     await page.locator('input[id="firstName"]').fill(newUser.firstName)
@@ -40,6 +44,24 @@ test('successfully register new user', async ({ page }) => {
 
 
     
+  });
+
+
+  test('error Messages for missing Mandatory fields', async ({ page }) => {
+     
+    await page.locator('a').getByText('Register here').click()
+
+    await page.locator('input[id="firstName"]').fill(newUser.firstName)
+    
+    const occupationDropdown = await page.locator('[formcontrolname="occupation"]')
+    await occupationDropdown.selectOption('Student')
+    await page.locator('input[type="checkbox"]').nth(0).check()
+    await page.locator('input[id="login"]').click()
+    await expect(await page.getByText('*Email is required')).toBeVisible()
+    await expect(await page.getByText('*Phone Number is required')).toBeVisible()
+    await expect(await page.getByText('*Password is required')).toBeVisible()
+    await expect(await page.getByText('Confirm Password is required')).toBeVisible()
+
   });
 
 
