@@ -25,11 +25,11 @@ test.describe('login features',()=>{
 
     const wrongCredentials : loginDetails = {
         email: 'timmy_001@example.com',
-        password : '12.Nopassword.12'
+        password : '12.Nopassword.13'
     }
 
 test('successfully login user',async ({page})=>{
-    await expect(page.locator('iinput[id="login"]')).toBeVisible()
+    await expect(page.locator('input[id="login"]')).toBeVisible()
     await page.locator('input[id="userEmail"]').pressSequentially(userCredentials.email)
     await page.locator('[id="userPassword"]').pressSequentially(userCredentials.password)
     await page.locator('input[id="login"]').click()
@@ -51,7 +51,7 @@ test('invalid login password',async ({page})=>{
     await page.locator('input[id="userEmail"]').pressSequentially(userCredentials.email)
     await page.locator('[id="userPassword"]').pressSequentially(wrongCredentials.password)
     await page.locator('input[id="login"]').click()
-    await expect(page.getByText('Incorrect email or password.')).toBeVisible()
+    await expect(await page.getByText('Incorrect email or password.')).toBeVisible()
     
 })
 
