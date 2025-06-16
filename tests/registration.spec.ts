@@ -61,26 +61,10 @@ test('successfully register new user', async ({ page }) => {
     await signup.validate_errorMessages(registration.password)
     await signup.validate_errorMessages(registration.confirmPassword)
     
-
-
-    
   });
 
 
    test('error Messages for missing Mandatory First name field', async ({ page }) => { 
-    // await page.locator('a').getByText('Register here').click()
-    // await page.locator('input[id="lastName"]').fill(newUser.lastName)
-    // await page.locator('input[id="userEmail"]').fill(newUser.email)
-    // await page.locator('input[id="userMobile"]').fill(newUser.phoneNumber)
-    // const occupationDropdown = await page.locator('[formcontrolname="occupation"]')
-    // await occupationDropdown.selectOption('Student')
-    // await page.locator('input[id="userPassword"]').fill(newUser.password)
-    // await page.locator('input[id="confirmPassword"]').fill(newUser.password)
-    // await page.locator('input[type="checkbox"]').nth(0).check()
-    // await page.locator('input[id="login"]').click()
-    // await expect(await page.getByText(registration.firstName_Error)).toBeVisible()
-
-
     await signup.clickRegister()
     await signup.inputLastName(newUser.lastName)
     await signup.inputEmail(newUser.email)

@@ -5,6 +5,10 @@ export enum registration{
     password = "*Password is required",
     confirmPassword = "Confirm Password is required"
 
+}
 
 
+
+export enum login{
+    unsuccessfulLogin = "Incorrect email or password."
 }
