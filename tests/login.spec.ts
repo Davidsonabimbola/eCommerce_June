@@ -1,17 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { LoginFeatures } from '../pages/Login';
 import { login } from '../utils/Register_ErrorMessages';
+import Credentials from '../utils/Credentials';
 
 
-
-export interface loginDetails {
-        email : string
-        password : string
-        
-    }
-
-
+    
     let login_features : LoginFeatures
+    let credentials = Credentials
 
 
 test.beforeEach(async ({page})=>{
@@ -21,22 +16,16 @@ login_features = new LoginFeatures(page)
 
 
 test.describe('login features',()=>{
+    const validCreds = credentials.validCredentials()
+    const invalidCreds = credentials.invalidCredentials()
+    
 
 
-    const userCredentials : loginDetails = {
-        email : 'timmy_004@example.com',
-        password : '12.Nopassword.12',
-        
-    }
-
-    const wrongCredentials : loginDetails = {
-        email: 'timmy_001@example.com',
-        password : '12.Nopassword.13'
-    }
+   
 
 test('successfully login user',async ({page})=>{
-    await login_features.inputEmail(userCredentials.email)
-    await login_features.inputPassword(userCredentials.password)
+    await login_features.inputEmail(validCreds.email)
+    await login_features.inputPassword(validCreds.password)
     await login_features.clickLogin()
     await login_features.validate_successful_login()
 
@@ -45,8 +34,8 @@ test('successfully login user',async ({page})=>{
 
 test('invalid login email',async ({page})=>{
 
-    await login_features.inputEmail(wrongCredentials.email)
-    await login_features.inputPassword(userCredentials.password)
+    await login_features.inputEmail(invalidCreds.email)
+    await login_features.inputPassword(validCreds.password)
     await login_features.clickLogin()
     await login_features.validate_login_error(login.unsuccessfulLogin)
     
@@ -56,8 +45,8 @@ test('invalid login email',async ({page})=>{
 
 test('invalid login password',async ({page})=>{
 
-    await login_features.inputEmail(userCredentials.email)
-    await login_features.inputPassword(wrongCredentials.password)
+    await login_features.inputEmail(validCreds.email)
+    await login_features.inputPassword(invalidCreds.password)
     await login_features.clickLogin()
     await login_features.validate_login_error(login.unsuccessfulLogin)
     
@@ -65,8 +54,8 @@ test('invalid login password',async ({page})=>{
 
 
 test('successfully logout user',async ({page})=>{
-    await login_features.inputEmail(userCredentials.email)
-    await login_features.inputPassword(userCredentials.password)
+    await login_features.inputEmail(validCreds.email)
+    await login_features.inputPassword(validCreds.password)
     await login_features.clickLogin()
     await login_features.validate_successful_login()
     await login_features.logoutUser()
