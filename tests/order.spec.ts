@@ -21,7 +21,7 @@ test.describe('Single order',()=>{
 
 
 
-    test.only('successful place multiple orders', async ({ loggedInPage }) => {
+    test('successful place multiple orders', async ({ loggedInPage }) => {
   const productContainer =await loggedInPage.locator('.card-body');
   const productContainerCount = await productContainer.count();
   console.log(`Number of product cards: ${productContainerCount}`);
