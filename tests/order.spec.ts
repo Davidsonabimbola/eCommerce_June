@@ -21,12 +21,12 @@ test.describe('Single order',()=>{
 
 
 
-    test.only('successful place multiple orders', async ({ loggedInPage }) => {
+    test('successful place multiple orders', async ({ loggedInPage }) => {
   const productContainer =await loggedInPage.locator('.card-body');
   const productContainerCount = await productContainer.count();
   console.log(`Number of product cards: ${productContainerCount}`);
 
-  const itemsToOrder = ['ADIDAS ORIGINAL', 'IPHONE 13 PRO'];
+  const itemsToOrder = ['ADIDAS ORIGINAL', 'IPHONE 13 PRO', 'ZARA COAT 3'];
 
   for (const itemName of itemsToOrder) {
     for (let i = 0; i < productContainerCount; i++) {
