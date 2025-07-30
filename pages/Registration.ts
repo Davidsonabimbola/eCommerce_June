@@ -64,7 +64,7 @@ class signupFeatures{
     }
 
     async submitButton(){
-        this.page.locator('input[id="login"]').click()
+        await this.page.locator('input[id="login"]').click()
     }
 
     async validate_errorMessages(errorMessage: string){

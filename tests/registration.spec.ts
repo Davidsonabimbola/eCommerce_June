@@ -23,8 +23,8 @@ export interface userDetails {
 test.describe('Register new user',()=>{
 
      const newUser : userDetails ={
-        email : "timmy_004@example.com",
-        firstName : "Timmy",
+        email : "timmy_0087@example.com",
+        firstName : "Timmo",
         lastName : 'Banks',
         phoneNumber : '2359087632',
         password : '12.Nopassword.12',
