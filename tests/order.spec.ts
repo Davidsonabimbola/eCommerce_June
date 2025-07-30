@@ -25,6 +25,7 @@ test.describe('Single order',()=>{
   const productContainer =await loggedInPage.locator('.card-body');
   const productContainerCount = await productContainer.count();
   console.log(`Number of product cards: ${productContainerCount}`);
+  const orderPrice:number[] = []
 
   const itemsToOrder = ['ADIDAS ORIGINAL', 'IPHONE 13 PRO', 'ZARA COAT 3'];
 
@@ -34,7 +35,13 @@ test.describe('Single order',()=>{
       const title = await product.locator('h5').textContent();
 
       if (title?.trim() === itemName) {
+        // remove all characters except digits and dots
+        const itemPriceText = await product.locator('.text-muted').textContent();
+        const itemPrice = itemPriceText ? parseFloat(itemPriceText.replace(/[^\d.]/g, '')) : 0;
+        console.log(await itemPrice)
+        
         await product.locator('button', { hasText: 'Add To Cart' }).click();
+        await expect(await loggedInPage.getByText('Product Added To Cart')).toBeVisible()
         console.log(`Clicked Add to Cart for: ${itemName}`);
         break; // Stop loop once item is found
       }
@@ -43,5 +50,14 @@ test.describe('Single order',()=>{
 
   console.log('All requested items added to cart');
 });
+
+
+
+test('filter orders',async({loggedInPage})=>{
+  await loggedInPage.locator('[name="minPrice"]').nth(1).fill('2000')
+  await loggedInPage.locator('input[name="maxPrice"]').nth(1).fill('54544')
+  await loggedInPage.locator('#sidebar').getByText('Search', { exact: true }).click()
+  await expect(await loggedInPage.getByText('No Products Found')).toBeVisible()
+})
 
 })
