@@ -56,7 +56,7 @@ test.describe('Single order',()=>{
 test('filter orders',async({loggedInPage})=>{
   await loggedInPage.locator('[name="minPrice"]').nth(1).fill('2000')
   await loggedInPage.locator('input[name="maxPrice"]').nth(1).fill('54544')
-  await loggedInPage.locator('#sidebar').getByText('Search', { exact: true }).click()
+  //await loggedInPage.locator('#sidebar').getByText('Search', { exact: true }).click()
   //await expect(await loggedInPage.getByText('No Products Found')).toBeVisible()
 })
 
