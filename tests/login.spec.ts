@@ -17,11 +17,7 @@ login_features = new LoginFeatures(page)
 
 test.describe('login features',()=>{
     const validCreds = credentials.validCredentials()
-    const invalidCreds = credentials.invalidCredentials()
-    
-
-
-   
+    const invalidCreds = credentials.invalidCredentials() 
 
 test('successfully login user',async ({page})=>{
     await login_features.inputEmail(validCreds.email)
