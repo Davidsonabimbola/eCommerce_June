@@ -12,3 +12,4 @@ export enum registration{
 export enum login{
     unsuccessfulLogin = "Incorrect email or password."
 }
+
