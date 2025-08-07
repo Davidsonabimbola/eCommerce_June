@@ -26,6 +26,48 @@ export class OrderFeatures {
         await cartButton.click()
     }
 
+    async checkout_item(){
+        await this.page.getByRole('button',{name:'Checkout'}).click()
+    }
+
+    async clear_card_number_field(cardNumber:string){
+        await this.page.locator('[class="input txt text-validated"]').nth(0).clear()
+        await this.page.locator('[class="input txt text-validated"]').nth(0).fill(cardNumber)
+    }
+
+
+    async fillcardName(cardName:string){
+        await this.page.locator('input[class="input txt"]').nth(1).fill(cardName)
+    }
+
+    async fill_cvvNumber(cardCVV:string){
+        await this.page.locator('input[class="input txt"]').nth(0).fill(cardCVV)
+    }
+
+    async selectCountry(){
+        await  expect(await this.page.locator('[class="input txt text-validated"]').nth(1)).toBeVisible()
+        await this.page.locator('[class="input txt text-validated"]').nth(1).fill('Nigeria')
+        await this.page.getByRole('button',{name:' Nigeria'}).click()
+       
+        // await expect(await this.page.locator('section[class="ta-results list-group ng-star-inserted"]')).toBeVisible()
+        // const Search_Results = await this.page.locator('[class="ta-results list-group ng-star-inserted"]')
+        // const searchfield = await Search_Results.locator('[class="ta-item list-group-item ng-star-inserted"]')
+
+
+      
+    }
+
+    async placeOrder(){
+        await this.page.locator('[class="btnn action__submit ng-star-inserted"]').click()
+    }
+
+    async validate_successfulOrder(){
+        const success_ordertext = await this.page.getByText(' Thankyou for the order. ')
+        const downloadReceipt = await this.page.getByRole('button',{name:'Click To Download Order Details in CSV'})
+        await expect(await success_ordertext).toBeVisible()
+        await expect(await downloadReceipt).toBeVisible()
+    }
+
     async select_multiple_order(orders:string[]) {
         const productContainer = await this.page.locator('.card-body');
         const productContainerCount = await productContainer.count();
