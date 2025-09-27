@@ -4,8 +4,17 @@ import { OrderFeatures } from "../pages/Order";
 import * as single_order_data from "../fixtures/data/singleorder.json";
 import * as multi_order_data from "../fixtures/data/multipleorder.json"
 import { toast_messages } from "../utils/Order_Messages";
+import { paymentDetails } from "../utils/Payment";
 
 let order_features: OrderFeatures
+
+
+
+const User = paymentDetails.Payer()
+
+const UserName = User.cardName
+const UserNumber = User.cardNumber
+const UserCVV = User.cardCVV
 
 test.beforeEach(async ({ loggedInPage }) => {
   order_features = new OrderFeatures(loggedInPage)
@@ -19,6 +28,12 @@ test.describe('Single order', () => {
     await order_features.select_single_order(singleOrder_data.orderName)
     await order_features.assert_selected_order(toast_messages.product_sucess)
     await order_features.select_cart()
+    await order_features.checkout_item()
+    await order_features.fillcardName(UserName)
+    await order_features.fill_cvvNumber(UserCVV)
+    //await order_features.clear_card_number_field(UserNumber)
+    await order_features.selectCountry()
+    await order_features.placeOrder()
 
 
     // const productContainer = await loggedInPage.locator('[class="card-body"]')
@@ -30,8 +45,6 @@ test.describe('Single order', () => {
     //   const cartButton = await loggedInPage.getByRole('button',{name:/Cart/i}).nth(0)
     //   //const cartButton = await loggedInPage.getByRole('button', { name: /^\s* Cart\s*$/i });
     //   await cartButton.click()
-
-
 
 
   })

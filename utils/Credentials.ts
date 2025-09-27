@@ -22,7 +22,7 @@ export interface loginDetails {
         public static invalidCredentials(): loginDetails{
             return {
                 email: 'timmy_001@example.com',
-                password : '12.Nopassword.13'
+                password : '12.Nopassword.139'
             }
 
         }
