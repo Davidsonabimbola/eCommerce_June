@@ -9,7 +9,6 @@ import { paymentDetails } from "../utils/Payment";
 let order_features: OrderFeatures
 
 
-
 const User = paymentDetails.Payer()
 
 const UserName = User.cardName
