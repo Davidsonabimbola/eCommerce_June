@@ -48,13 +48,7 @@ export class OrderFeatures {
         await  expect(await this.page.locator('[class="input txt text-validated"]').nth(1)).toBeVisible()
         await this.page.locator('[class="input txt text-validated"]').nth(1).fill('Argentina')
         //await this.page.getByRole('button',{name:' Argentina'}).click()
-       
-        // await expect(await this.page.locator('section[class="ta-results list-group ng-star-inserted"]')).toBeVisible()
-        // const Search_Results = await this.page.locator('[class="ta-results list-group ng-star-inserted"]')
-        // const searchfield = await Search_Results.locator('[class="ta-item list-group-item ng-star-inserted"]')
-
-
-      
+           
     }
 
     async placeOrder(){
